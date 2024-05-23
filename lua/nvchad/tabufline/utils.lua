@@ -41,11 +41,12 @@ local function gen_unique_name(oldname, index)
   end
 end
 
-local function align(style, name, len)
+local function align(style, name, sublen, maxlen)
+  local dots = (#name > maxlen and ".." or "")
   if style == "right" then
-    return string.sub(name, -len)
+    return dots .. string.sub(name, -sublen)
   else -- "left" or unknown or nil
-    return string.sub(name, 1, len)
+    return string.sub(name, 1, sublen) .. dots
   end
 end
 
@@ -75,7 +76,7 @@ M.style_buf = function(nr, i)
 
   local maxname_len = 15
 
-  name = align(config.align, name, 13) .. (#name > maxname_len and ".." or "")
+  name = align(config.align, name, 13, maxname_len)
   name = M.txt(" " .. name, tbHlName)
 
   name = strep(" ", pad) .. (icon_hl .. icon .. name) .. strep(" ", pad - 1)
