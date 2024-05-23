@@ -5,6 +5,7 @@ local get_opt = api.nvim_get_option_value
 local strep = string.rep
 local cur_buf = api.nvim_get_current_buf
 local buf_name = api.nvim_buf_get_name
+local config = require("nvconfig").ui.tabufline
 
 M.txt = function(str, hl)
   str = str or ""
@@ -40,6 +41,14 @@ local function gen_unique_name(oldname, index)
   end
 end
 
+local function align(style, name, len)
+  if style == "right" then
+    return string.sub(name, -len)
+  else -- "left" or unknown or nil
+    return string.sub(name, 1, len)
+  end
+end
+
 M.style_buf = function(nr, i)
   -- add fileicon + name
   local icon = "󰈚"
@@ -66,7 +75,7 @@ M.style_buf = function(nr, i)
 
   local maxname_len = 15
 
-  name = string.sub(name, 1, 13) .. (#name > maxname_len and ".." or "")
+  name = align(config.align, name, 13) .. (#name > maxname_len and ".." or "")
   name = M.txt(" " .. name, tbHlName)
 
   name = strep(" ", pad) .. (icon_hl .. icon .. name) .. strep(" ", pad - 1)
