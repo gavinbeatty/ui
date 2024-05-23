@@ -110,6 +110,8 @@
 ---@field order? ('"treeOffset"'|'"buffers"'|'"tabs"'|'"btns"')[] | string[]
 --- Show numbers on tabufline buffer tabs
 ---@field show_numbers? boolean
+--- Alignment of the path text in each tab: "left" biases the start, "right" biases the end
+---@field align? ('"left"'|'"right"') | string
 --- Your modules to be added to the tabufline
 --- ```lua
 ---     modules = {
