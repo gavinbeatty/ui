@@ -110,6 +110,8 @@
 ---@field order? ('"treeOffset"'|'"buffers"'|'"tabs"'|'"btns"')[] | string[]
 --- Show numbers on tabufline buffer tabs
 ---@field show_numbers? boolean
+--- Truncation display style bias: "head" => root, "tail" => basename
+---@field path_style? ('"head"'|'"tail"') | string
 --- Your modules to be added to the tabufline
 --- ```lua
 ---     modules = {
